@@ -1,0 +1,8 @@
+node_modules/
+build/
+coverage/
+*.tgz
+.env
+
+# Do NOT gitignore dist/ — GitHub Actions requires it committed
+# dist/

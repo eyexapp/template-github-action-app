@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Format check
+        run: npm run format:check
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Test
+        run: npm run test -- --coverage
+
+      - name: Build
+        run: npm run build
+
+      - name: Verify dist is up to date
+        run: |
+          if [ "$(git diff --name-only dist/)" != "" ]; then
+            echo "::error::dist/index.js is out of date. Run 'npm run build' and commit."
+            exit 1
+          fi

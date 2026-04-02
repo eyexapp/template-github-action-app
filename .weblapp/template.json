@@ -1,0 +1,33 @@
+{
+  "name": "github-action-app",
+  "displayName": "GitHub Action",
+  "description": "Custom GitHub Action template with TypeScript, CI/CD workflows, and automated release pipeline",
+  "category": "devtool",
+  "language": "typescript",
+  "framework": "github-actions",
+  "stack": ["typescript", "github-actions", "jest", "ncc"],
+  "features": ["custom-action", "ci-cd", "automated-release", "testing"],
+  "commands": {
+    "build": "npm run build",
+    "test": "npm test",
+    "lint": "npm run lint"
+  },
+  "packageManager": "npm",
+  "ci": {
+    "workflowTemplate": "github-action-app",
+    "runner": "ubuntu-latest",
+    "runtime": {
+      "name": "node",
+      "version": "20",
+      "setup": "actions/setup-node@v4",
+      "cache": "npm"
+    },
+    "services": {},
+    "steps": {
+      "install": "npm ci",
+      "build": "npm run build",
+      "test": "npm test",
+      "lint": "npm run lint"
+    }
+  }
+}

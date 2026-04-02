@@ -1,0 +1,28 @@
+name: 'README Generator'
+description: 'AI-powered README generator — tag an issue with AutoReadme and get a PR with a generated README.'
+
+inputs:
+  github-token:
+    description: 'GitHub token for API access (e.g. secrets.GITHUB_TOKEN)'
+    required: true
+  ai-api-key:
+    description: 'API key for the AI provider'
+    required: true
+  ai-provider:
+    description: 'AI provider to use (currently supported: gemini)'
+    required: false
+    default: 'gemini'
+
+outputs:
+  pull-request-url:
+    description: 'URL of the created pull request'
+  readme-path:
+    description: 'Path to the generated README file'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
+
+branding:
+  icon: 'file-text'
+  color: 'blue'
